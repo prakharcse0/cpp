@@ -1,0 +1,58 @@
+q.2) What are the key characteristics of std::unique_ptr regarding ownership?
+
+The "unique" in std::unique_ptr directly refers to its primary characteristic: exclusive ownership. This means:
+
+Single Ownership: At any given time, only one std::unique_ptr can own a particular dynamically allocated object. T
+here cannot be two std::unique_ptr instances managing the same raw pointer simultaneously.
+
+C++
+
+std::unique_ptr<int> ptr1(new int(10));
+// std::unique_ptr<int> ptr2 = ptr1; // ERROR: unique_ptr is not copyable
+Non-Copyable: To enforce single ownership, std::unique_ptr's copy constructor and copy assignment operator are deleted. You cannot copy a std::unique_ptr. This compile-time restriction prevents accidental shared ownership that would lead to double deletion issues.
+
+C++
+
+std::unique_ptr<MyClass> obj1(new MyClass());
+// std::unique_ptr<MyClass> obj2 = obj1; // Compile-time error!
+Movable (Transferable Ownership): While not copyable, std::unique_ptr is movable. This means that ownership of the dynamically allocated object can be transferred from one std::unique_ptr to another. When ownership is moved, the source std::unique_ptr becomes "empty" (it no longer owns the resource, and its internal raw pointer becomes nullptr), and the destination std::unique_ptr takes over ownership. This is typically done using std::move.
+
+C++
+
+std::unique_ptr<int> ptrA(new int(20)); // ptrA owns the int
+std::unique_ptr<int> ptrB = std::move(ptrA); // Ownership transferred from ptrA to ptrB
+                                          // ptrA is now empty (nullptr)
+                                          // ptrB now owns the int
+// std::cout << *ptrA; // This would crash as ptrA is nullptr
+std::cout << *ptrB; // Output: 20
+This movability is crucial for passing unique_ptrs to functions, returning them from functions, and storing them in standard library containers like std::vector.
+
+No Reference Counting: Unlike std::shared_ptr, std::unique_ptr does not use reference counting. This makes it extremely lightweight and efficient, as there's no overhead for incrementing and decrementing counters. The decision to deallocate is solely based on the std::unique_ptr going out of scope.
+
+Custom Deleters: std::unique_ptr allows you to specify a custom deleter. This is incredibly powerful for managing resources that are not deallocated with delete (e.g., file handles closed with fclose, network sockets closed with close, memory allocated with malloc and freed with free). The custom deleter is a callable object (function, lambda, function object) that std::unique_ptr will invoke in its destructor to release the resource.
+
+C++
+
+// Example with a custom deleter for a FILE*
+struct FileDeleter {
+    void operator()(FILE* file) const {
+        if (file) {
+            fclose(file);
+        }
+    }
+};
+
+std::unique_ptr<FILE, FileDeleter> filePtr(fopen("example.txt", "w"));
+if (filePtr) {
+    fprintf(filePtr.get(), "Hello, RAII!\n");
+}
+// When filePtr goes out of scope, FileDeleter::operator() is called, closing the file.
+In summary, std::unique_ptr is the go-to smart pointer in modern C++ for managing dynamically allocated objects when you need clear, exclusive ownership and automatic, exception-safe resource cleanup, all with minimal overhead. Its design firmly adheres to the RAII principle.
+
+
+Sources
+
+
+
+
+

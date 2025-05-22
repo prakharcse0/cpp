@@ -1,0 +1,46 @@
+Conceptual: When would you use ptr.get()? What is the caller's responsibility when they obtain a raw pointer via get()?
+ptr.get() is a member function of std::unique_ptr (and std::shared_ptr) that returns the raw pointer to the managed object.
+
+When to use ptr.get():
+
+You would use ptr.get() in situations where you need to interact with C-style APIs or libraries that expect a raw pointer and have no knowledge of smart pointers.
+
+Common scenarios include:
+
+Interfacing with legacy C APIs: Many C libraries (e.g., POSIX functions, Windows API calls, OpenGL, file I/O libraries) operate directly on raw pointers.
+C++
+
+// Example: Using fopen (C library)
+std::unique_ptr<FILE, void(*)(FILE*)> file_ptr(fopen("data.txt", "w"), &fclose);
+if (file_ptr) {
+    fprintf(file_ptr.get(), "Hello from unique_ptr!\n"); // fprintf expects FILE*
+}
+Passing to functions that expect a raw pointer to merely observe: If a function's signature is void process_data(SomeStruct* data) and it just reads or modifies the SomeStruct without taking ownership or deallocating it, you can pass my_unique_ptr.get().
+C++
+
+void print_book_details(const Book* b) {
+    if (b) {
+        std::cout << "Details: " << b->title << std::endl;
+    }
+}
+
+std::unique_ptr<Book> myBook = std::make_unique<Book>("C++ Primer");
+print_book_details(myBook.get()); // Pass the raw pointer for observation
+Checking the underlying pointer value: Sometimes you might need to compare the raw pointer for debugging purposes or certain low-level checks.
+C++
+
+if (my_unique_ptr.get() != nullptr) {
+    // ...
+}
+When you need to pass a nullptr explicitly: my_unique_ptr.get() will return nullptr if the unique_ptr is empty.
+What is the caller's responsibility when they obtain a raw pointer via get()?
+
+When you obtain a raw pointer via ptr.get(), the caller (or the code using that raw pointer) has NO OWNERSHIP RESPONSIBILITY over the managed resource.
+
+The std::unique_ptr still retains full ownership and responsibility for the lifetime of the object. This means:
+
+Do NOT delete the raw pointer obtained from get(): Doing so would lead to a double-free, as the unique_ptr will also try to delete it when it goes out of scope.
+The raw pointer might become invalid: If the unique_ptr itself is reset, moved, or goes out of scope, the raw pointer obtained from get() will become a dangling pointer. It's the caller's responsibility to ensure the unique_ptr remains valid for the duration of the raw pointer's use.
+The unique_ptr remains the single point of control for lifetime: All decisions about the resource's lifetime (when it's deleted, transferred, etc.) are made by the unique_ptr, not by users of the raw pointer obtained via get().
+In essence, get() provides a "view" into the managed resource without transferring any control or responsibility.
+
