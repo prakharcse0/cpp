@@ -1,0 +1,1 @@
+Hello from modern C++ using shared_ptr!
