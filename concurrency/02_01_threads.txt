@@ -1,0 +1,11 @@
+Execution Unit: A thread represents a single, sequential flow of control within a process.
+
+Shared Resources: Threads within the same process share that process's code section, data section, 
+and operating system resources (e.g., memory space, open files, sockets, global variables).
+
+
+Independent State: Each thread maintains its own:
+Program Counter (PC) / Instruction Pointer (IP): Points to the next instruction to be executed.
+Register Set: Stores the current state of the CPU's general-purpose and special-purpose registers.
+Stack: A private call stack for storing local variables, function parameters, and return addresses for its own execution path.
+Thread ID: A unique identifier within the process.
