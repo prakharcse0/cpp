@@ -10,6 +10,7 @@
         "format": "cpp",
         "initializer_list": "cpp",
         "span": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "atomic": "cpp"
     }
 }
