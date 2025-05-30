@@ -1,0 +1,25 @@
+Avoiding Problematic Race Conditions
+Problematic race conditions (where invariants are broken) must be avoided. Several strategies exist:
+
+Protecting Shared Data with Mutexes:
+
+Concept: Wrap the shared data structure with a protection mechanism (e.g., a mutex).
+Goal: Ensure only one thread can modify the data at a time, making intermediate, inconsistent states invisible to other threads. Other threads see modifications as either complete or not yet started.
+C++ Standard Library: Provides several mechanisms for this (e.g., std::mutex).
+Focus of this Chapter: The most basic and common method, std::mutex, will be discussed first.
+Lock-Free Programming:
+
+Concept: Design data structures and their invariants so that modifications are performed as a series of indivisible (atomic) changes, each of which always preserves the invariants.
+Difficulty: Extremely complex to get right. Requires deep understanding of the C++ memory model and atomic operations.
+Coverage: Memory model in Chapter 5, lock-free programming in Chapter 7.
+Software Transactional Memory (STM):
+
+Concept: Treat data updates as database-like transactions. A series of modifications and reads are logged privately, then committed in a single step.
+Conflict Resolution: If data is modified by another thread before commit, the transaction is restarted.
+C++ Support: No direct standard library support for STM (active research area).
+Takeaway: The core idea of "doing something privately and then committing in a single step" is a valuable pattern.
+Summary of Strategies:
+
+Mutexes: Easiest, most common. Serializes access to shared data.
+Lock-Free: Hard, high performance potential. Relies on atomic operations and careful design.
+STM: Advanced, high-level. Transactional approach, not directly in C++ standard.

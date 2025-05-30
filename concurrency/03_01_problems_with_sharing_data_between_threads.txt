@@ -1,0 +1,45 @@
+Race Conditions and Broken Invariants
+
+Problem: Modifying shared data between threads can lead to broken invariants. 
+An invariant is a condition that must always be true for a data structure to be valid.
+
+Example (Doubly Linked List Deletion):
+Identify node N to delete.
+Update link from node prior to N to point to node after N.
+Update link from node after N to point to node prior to N.
+Delete node N.
+
+Between steps 2 and 3, the list's links are inconsistent (one direction updated, the other not). 
+If another thread reads the list at this exact moment, it sees a broken invariant.
+
+Consequences of Broken Invariants:
+Can lead to corrupted data structures.
+Can cause program crashes.
+Can result in incorrect program behavior.
+
+
+Race Conditions
+Definition: A race condition occurs when a program's outcome depends on the relative order of execution of operations across two or more threads. 
+Threads "race" to perform their operations.
+
+Benign vs. Problematic:
+
+Benign: Outcomes might vary, but all variations are acceptable 
+(e.g., two threads adding items to a queue; the final order of items doesn't matter). 
+These aren't usually considered bugs.
+
+Problematic: The race condition leads to broken invariants, causing incorrect or undefined behavior 
+(e.g., the doubly linked list example where one link is updated before the other). 
+When people say "race condition," they usually mean a problematic one.
+
+Data Race: A specific type of problematic race condition defined by the C++ Standard. 
+It arises from concurrent modification of a single object where at least one modification is a write and no synchronization is used. 
+Data races lead to undefined behavior.
+
+Common Cause: Operations requiring modifications to multiple distinct pieces of data (like two link pointers). 
+Because these must be modified in separate CPU instructions, another thread can interleave and observe an inconsistent state.
+
+Debugging Difficulty:
+Race conditions are often hard to find and reproduce because the "window of opportunity" for interleaved execution can be very small.
+They are timing-sensitive and might disappear or change behavior when run under a debugger, which alters program timing.
+They tend to appear more frequently as system load or operation frequency increases.
