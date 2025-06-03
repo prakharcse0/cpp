@@ -12,6 +12,7 @@
         "span": "cpp",
         "chrono": "cpp",
         "atomic": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "memory_resource": "cpp"
     }
 }
