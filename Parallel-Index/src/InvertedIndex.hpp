@@ -1,10 +1,9 @@
-// project_root/src/InvertedIndex.hpp
 #pragma once
 
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <shared_mutex> // C++17 for std::shared_mutex
+#include <shared_mutex>
 
 /**
  * @brief Represents an occurrence of a word within a specific file.

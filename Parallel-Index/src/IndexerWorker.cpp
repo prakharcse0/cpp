@@ -1,4 +1,3 @@
-// project_root/src/IndexerWorker.cpp
 #include "IndexerWorker.hpp"
 #include <string>
 #include <sstream> // For std::stringstream
@@ -12,9 +11,10 @@
 IndexerWorker::IndexerWorker(ConcurrentQueue<FileInfo>& file_queue, InvertedIndex& index)
     : file_queue_(file_queue), index_(index) {}
 
+
 /**
  * @brief The main execution logic for the worker thread.
- * This method should be called by std::jthread or std::thread.
+ * This method should be called by std::thread.
  * It continuously processes files until the queue is closed and empty.
  */
 void IndexerWorker::operator()() {
@@ -26,6 +26,7 @@ void IndexerWorker::operator()() {
     }
     std::cout << "[Worker " << std::this_thread::get_id() << "] Exiting. Queue closed and empty." << std::endl;
 }
+
 
 /**
  * @brief Processes a single file: reads, tokenizes, and indexes its content.

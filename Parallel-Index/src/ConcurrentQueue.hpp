@@ -1,4 +1,3 @@
-// project_root/src/ConcurrentQueue.hpp
 #pragma once
 
 #include <queue>              // For std::queue
@@ -15,22 +14,26 @@
  *
  * @tparam T The type of elements to be stored in the queue.
  */
+
 template<typename T>
 class ConcurrentQueue {
+
+private:
+    std::queue<T> queue_;            // The underlying standard queue
+    mutable std::mutex mutex_;       // Mutex to protect access to queue_ and closed_
+    std::condition_variable cond_var_; // Condition variable for signaling and waiting
+    bool closed_ = false;            // Flag to indicate if the queue is closed for pushing
+
 public:
-    /**
-     * @brief Pushes a value onto the back of the queue.
-     * This operation is thread-safe.
-     *
-     * @param value The value to be pushed (copied or moved).
-     */
+    // @brief Pushes @param value value onto the back of the queue.
     void push(T value) {
         { // Scope for unique_lock
-            std::unique_lock<std::mutex> lock(mutex_); // Acquire lock to protect queue_ and closed_
+            std::unique_lock<std::mutex> lock(mutex_);
             queue_.push(std::move(value)); // Use std::move for efficiency if 'value' is an rvalue
-        } // Lock is released here
+        }
         cond_var_.notify_one(); // Notify one waiting consumer that a new item is available
     }
+
 
     /**
      * @brief Attempts to pop a value from the front of the queue without blocking.
@@ -50,10 +53,12 @@ public:
             return std::nullopt;
         }
 
-        T value = std::move(queue_.front()); // Get value
+        T value = std::move(queue_.front()); 
+        // Since we're about to queue_.pop() and discard the original, moving avoids an unnecessary copy.
         queue_.pop(); // Remove from queue
         return value; // Return as optional
     }
+
 
     /**
      * @brief Blocks until a value is available in the queue and then pops it.
@@ -77,6 +82,7 @@ public:
         queue_.pop();
         return true;
     }
+
 
     /**
      * @brief Closes the queue, signaling that no more items will be pushed.
@@ -124,10 +130,4 @@ public:
         std::unique_lock<std::mutex> lock(mutex_);
         return queue_.size();
     }
-
-private:
-    std::queue<T> queue_;            // The underlying standard queue
-    mutable std::mutex mutex_;       // Mutex to protect access to queue_ and closed_
-    std::condition_variable cond_var_; // Condition variable for signaling and waiting
-    bool closed_ = false;            // Flag to indicate if the queue is closed for pushing
 };

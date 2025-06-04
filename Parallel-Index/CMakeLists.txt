@@ -1,9 +1,8 @@
 # project_root/CMakeLists.txt
-# project_root/CMakeLists.txt
 cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 project(ParallelIndex LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17) # Changed from 20 to 17 for broader compatibility
+set(CMAKE_CXX_STANDARD 17) # Ensures C++17 compatibility
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -20,6 +19,6 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     add_compile_options(-Wall -Wextra -Wpedantic -Werror) # -Werror treats warnings as errors
 endif()
 
-# Add subdirectories for source code and tests
+# Add subdirectories for source code only.
+# The 'tests' subdirectory is removed as per your request.
 add_subdirectory(src)
-add_subdirectory(tests) # We'll add test files later

@@ -1,11 +1,9 @@
-// project_root/src/FileInfo.hpp
 #pragma once
 
 #include <string>
 
-/**
- * @brief Represents metadata for a file to be indexed.
- */
+//  Represents metadata for a file to be indexed.
+
 struct FileInfo {
     size_t id;         ///< A unique identifier for the file within the index.
     std::string path;  ///< The full absolute path to the file.

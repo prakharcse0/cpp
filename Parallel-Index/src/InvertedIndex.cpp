@@ -1,4 +1,3 @@
-// project_root/src/InvertedIndex.cpp
 #include "InvertedIndex.hpp"
 #include <algorithm> // For std::find_if
 #include <mutex>

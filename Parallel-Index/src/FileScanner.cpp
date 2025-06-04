@@ -1,4 +1,3 @@
-// project_root/src/FileScanner.cpp
 #include "FileScanner.hpp"
 #include <iostream> // For logging errors/info
 #include <set>      // For indexable extensions

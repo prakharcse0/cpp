@@ -1,10 +1,9 @@
-// project_root/src/FileScanner.hpp
 #pragma once
 
 #include "ConcurrentQueue.hpp"
 #include "FileInfo.hpp"
-#include <filesystem> // C++17
-#include <atomic>     // For std::atomic
+#include <filesystem>
+#include <atomic>
 #include <string>
 
 /**

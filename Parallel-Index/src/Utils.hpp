@@ -1,4 +1,3 @@
-// project_root/src/Utils.hpp
 #pragma once
 
 #include <string>

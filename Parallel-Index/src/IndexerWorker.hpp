@@ -1,4 +1,3 @@
-// project_root/src/IndexerWorker.hpp
 #pragma once
 
 #include "ConcurrentQueue.hpp"

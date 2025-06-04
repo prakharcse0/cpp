@@ -1,4 +1,3 @@
-// project_root/src/main.cpp
 #include "FileScanner.hpp"
 #include "IndexerWorker.hpp"
 #include "InvertedIndex.hpp"
@@ -17,8 +16,6 @@
 #include <stdexcept>     // For std::out_of_range
 
 // A global map to store file ID to path mapping for search results.
-// In a more complex scenario, this might also be populated concurrently
-// or passed around, but for this design, we assume it's stable after indexing.
 std::unordered_map<size_t, std::string> g_file_id_to_path_map;
 
 int main(int argc, char* argv[]) {
@@ -46,7 +43,8 @@ int main(int argc, char* argv[]) {
     }
 
     // Set some common stop words to be ignored during tokenization
-    Utils::set_stop_words({"a", "an", "the", "and", "or", "but", "is", "are", "was", "were", "of", "in", "to", "for", "on", "with", "as", "at", "it", "its", "by"});
+    // Utils::set_stop_words({"a", "an", "the", "and", "or", "but", "is", "are", "was", "were", "of", "in", "to", "for", "on", "with", "as", "at", "it", "its", "by"});
+    Utils::set_stop_words({});
 
     // Instantiate core components
     ConcurrentQueue<FileInfo> file_queue;
@@ -134,10 +132,6 @@ int main(int argc, char* argv[]) {
 
             std::cout << "Found '" << query << "' in " << matched_file_ids.size() << " unique files (" << results.size() << " occurrences total):" << std::endl;
             for (size_t file_id : matched_file_ids) {
-                // To display the actual file path, you would need to populate `g_file_id_to_path_map`
-                // during the scanning phase by having the FileScanner store the FileInfo objects
-                // in a globally accessible, thread-safe map, or return a collection of them.
-                // For this example, we'll just show the File ID.
                 std::cout << "- File ID: " << file_id << std::endl;
                 // Example of how you'd use g_file_id_to_path_map if populated:
                 // if (g_file_id_to_path_map.count(file_id)) {
