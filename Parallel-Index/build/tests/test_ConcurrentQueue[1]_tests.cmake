@@ -1,0 +1,5 @@
+add_test([=[ConcurrentQueueTest.MultipleProducersConsumers]=]  /home/rust/cse_1/cpp/Parallel-Index/build/tests/test_ConcurrentQueue [==[--gtest_filter=ConcurrentQueueTest.MultipleProducersConsumers]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[ConcurrentQueueTest.MultipleProducersConsumers]=]  PROPERTIES WORKING_DIRECTORY /home/rust/cse_1/cpp/Parallel-Index/build/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+add_test([=[ConcurrentQueueTest.TimedWaitAndPopNotProvided_UsingWaitAndPop]=]  /home/rust/cse_1/cpp/Parallel-Index/build/tests/test_ConcurrentQueue [==[--gtest_filter=ConcurrentQueueTest.TimedWaitAndPopNotProvided_UsingWaitAndPop]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[ConcurrentQueueTest.TimedWaitAndPopNotProvided_UsingWaitAndPop]=]  PROPERTIES WORKING_DIRECTORY /home/rust/cse_1/cpp/Parallel-Index/build/tests SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==])
+set(  test_ConcurrentQueue_TESTS ConcurrentQueueTest.MultipleProducersConsumers ConcurrentQueueTest.TimedWaitAndPopNotProvided_UsingWaitAndPop)

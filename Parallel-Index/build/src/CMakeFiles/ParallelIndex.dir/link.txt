@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/ParallelIndex.dir/main.cpp.o -o ParallelIndex  libParallelIndexCore.a 

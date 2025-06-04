@@ -1,0 +1,5 @@
+if(EXISTS "/home/rust/cse_1/cpp/Parallel-Index/build/tests/test_ConcurrentQueue[1]_tests.cmake")
+  include("/home/rust/cse_1/cpp/Parallel-Index/build/tests/test_ConcurrentQueue[1]_tests.cmake")
+else()
+  add_test(test_ConcurrentQueue_NOT_BUILT test_ConcurrentQueue_NOT_BUILT)
+endif()

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libParallelIndexCore.a CMakeFiles/ParallelIndexCore.dir/FileScanner.cpp.o CMakeFiles/ParallelIndexCore.dir/IndexerWorker.cpp.o CMakeFiles/ParallelIndexCore.dir/InvertedIndex.cpp.o CMakeFiles/ParallelIndexCore.dir/Utils.cpp.o
+/usr/bin/ranlib libParallelIndexCore.a

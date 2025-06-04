@@ -1,0 +1,5 @@
+if(EXISTS "/home/rust/cse_1/cpp/Parallel-Index/build/tests/test_Utils[1]_tests.cmake")
+  include("/home/rust/cse_1/cpp/Parallel-Index/build/tests/test_Utils[1]_tests.cmake")
+else()
+  add_test(test_Utils_NOT_BUILT test_Utils_NOT_BUILT)
+endif()

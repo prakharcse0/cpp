@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_InvertedIndex.dir/test_inverted_index.cpp.o -o test_InvertedIndex  /usr/lib/x86_64-linux-gnu/libgtest_main.a ../src/libParallelIndexCore.a /usr/lib/x86_64-linux-gnu/libgtest.a 

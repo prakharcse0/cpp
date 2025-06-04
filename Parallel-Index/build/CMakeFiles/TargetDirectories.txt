@@ -1,0 +1,11 @@
+/home/rust/cse_1/cpp/Parallel-Index/build/CMakeFiles/edit_cache.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/CMakeFiles/rebuild_cache.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/src/CMakeFiles/ParallelIndexCore.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/src/CMakeFiles/ParallelIndex.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/src/CMakeFiles/edit_cache.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/src/CMakeFiles/rebuild_cache.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/tests/CMakeFiles/test_ConcurrentQueue.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/tests/CMakeFiles/test_InvertedIndex.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/tests/CMakeFiles/test_Utils.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/tests/CMakeFiles/edit_cache.dir
+/home/rust/cse_1/cpp/Parallel-Index/build/tests/CMakeFiles/rebuild_cache.dir

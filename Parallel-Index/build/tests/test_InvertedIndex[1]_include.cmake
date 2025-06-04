@@ -1,0 +1,5 @@
+if(EXISTS "/home/rust/cse_1/cpp/Parallel-Index/build/tests/test_InvertedIndex[1]_tests.cmake")
+  include("/home/rust/cse_1/cpp/Parallel-Index/build/tests/test_InvertedIndex[1]_tests.cmake")
+else()
+  add_test(test_InvertedIndex_NOT_BUILT test_InvertedIndex_NOT_BUILT)
+endif()
