@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "00_concurrent_design_princpiples_and": "cpp",
+        "mutex": "cpp",
+        "shared_mutex": "cpp"
+    }
+}
